@@ -2,33 +2,38 @@
 
 ## Tools Installed
 
-- **Cursor IDE** — Downloaded from cursor.com and installed on Windows.
-- **Claude Code for VS Code extension** — Installed via Cursor's Extensions panel (Ctrl+Shift+X). Found and installed the official extension by Anthropic.
-- **Codex extension** — Installed via Cursor's Extensions panel. Found the official OpenAI Codex extension and installed it successfully.
+- **Cursor IDE** — Downloaded and installed from cursor.com. First time using it, but the interface felt familiar since it's based on VS Code.
+- **Claude Code (VS Code extension)** — Installed inside Cursor via the Extensions panel. This is the official extension by Anthropic.
+- **Codex (OpenAI extension)** — Also installed via the Extensions panel inside Cursor.
 
-## Steps Completed
+## Steps I Completed
 
-1. Installed Cursor IDE from cursor.com
-2. Opened the Extensions panel (Ctrl+Shift+X) and searched for "Claude Code" — installed the Anthropic extension
-3. Searched for "Codex" — installed the OpenAI Codex extension
-4. Attempted to log in to Claude Code CLI by running `npm install -g @anthropic-ai/claude-code` in the terminal
-5. Created a public GitHub repository named `100hires-portfolio`
-6. Edited this README.md file to document the setup process
+1. Downloaded Cursor from cursor.com and installed it on Windows
+2. Opened the Extensions panel with Ctrl+Shift+X, searched "Claude Code", and installed the Anthropic one (the one with 20M+ installs)
+3. Did the same for "Codex" — found the OpenAI one and installed it
+4. Tried to run the Claude Code CLI by typing `claude` in the terminal — got an error saying the command wasn't recognized
+5. Looked it up and found I needed to install it separately via npm: `npm install -g @anthropic-ai/claude-code`
+6. That also failed at first — different error this time
+7. Created this GitHub repo and wrote up everything here
 
-## Issues Encountered & How I Solved Them
+## Problems I Hit (and How I Figured Them Out)
 
-**Issue 1: PowerShell script execution was blocked**  
-When running `npm install -g @anthropic-ai/claude-code`, I got a SecurityError saying running scripts is disabled on this system.  
-**Solution:** I ran `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` in PowerShell, which resolved the restriction and allowed npm to run.
+**Problem 1: `claude` command not found in terminal**  
+After installing the VS Code extension, I typed `claude` in the terminal and got a "not recognized" error. I didn't realize the CLI was a separate install from the extension.  
+**Fix:** Searched the error online, found that I needed Node.js and npm first. Downloaded Node.js LTS from nodejs.org, installed it, then ran `npm install -g @anthropic-ai/claude-code`.
 
-**Issue 2: Claude Code requires a Pro or Max subscription**  
-After successfully installing the CLI, the login page showed "Claude Max or Pro is required to connect to Claude Code." My account is on the Free Plan.  
-**Solution:** I documented this limitation. Claude Code can alternatively be used via an Anthropic API key. I proceeded with the remaining setup steps.
+**Problem 2: npm itself was blocked by PowerShell**  
+Even after installing Node.js, npm threw a `PSSecurityException` — something about scripts being disabled on the system.  
+**Fix:** Found the fix on Stack Overflow. Ran `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` in PowerShell, then npm worked fine.
 
-**Issue 3: Codex requires a ChatGPT Plus or Pro subscription**  
-Similarly, Codex is only available to paid ChatGPT subscribers.  
-**Solution:** Documented as a known limitation. Both tools are installed and ready to use once a subscription is available.
+**Problem 3: Claude Code needs a Pro or Max subscription to log in**  
+Once the CLI was working and I tried to authenticate, the browser opened and showed "Claude Max or Pro is required." I'm on the Free Plan.  
+**Fix:** No workaround for now without upgrading or using an API key. I noted it and moved on. The extension is installed and ready — just needs credentials.
 
-## Notes
+**Problem 4: Codex also needs a paid ChatGPT subscription**  
+Same situation — the extension installed fine but login requires ChatGPT Plus or higher.  
+**Fix:** Same as above, documented and moved forward.
 
-This was my first time using Cursor IDE. The interface was familiar because it is built on VS Code. I learned how to fix PowerShell execution policy restrictions independently by researching the error message. All tools are installed and the setup process is fully documented.
+## Honest Reflection
+
+Most of the time on this wasn't spent installing things — it was spent figuring out why things weren't working. The PowerShell security error was the most annoying one because it wasn't obvious at first. Looking back, none of the problems were that hard once I actually read the error messages carefully and searched for them. That felt like a good sign.
